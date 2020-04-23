@@ -1,0 +1,38 @@
+<%- include('./partial/header')%>
+
+<div class="container mt-5">
+    <h1>Book Table</h1>
+    <div class="d-flex justify-content-start">
+      <div class="p-2 bd-highlight"><a class="btn btn-primary" href="/book/add">Add Book</a></div>
+    </div>
+    <table class="table mt-3">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Writer</th>
+            <th scope="col">Publisher</th>
+            <th scope="col">Price</th>
+            <th scope="col">Released Year</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+         <% for(let i = 0 ; i < data.length ; i++) { %>
+        <tr>
+            <th scope="col"><%= data[i].title%></th>
+            <th scope="col"><%= data[i].writer%></th>
+            <th scope="col"><%= data[i].publisher%></th>
+            <th scope="col"><%= data[i].price%></th>
+            <th scope="col"><%= data[i].released_year%></th>
+            <th>
+              <a class="btn btn-primary" href="/book/edit/<%= data[i].id%>">Edit</a>
+              <a class="btn btn-danger" href="/book/delete/<%= data[i].id%>">Delete</a>
+              <a class="btn btn-primary mt-3" href="/book/review/<%= data[i].id%>">Review Book</a>
+            </th>
+        </tr>
+         <% } %>
+        </tbody>
+      </table>
+</div>
+</body>
+<%- include('./partial/footer')%>

@@ -1,0 +1,118 @@
+<%- include('./partial/header')%>
+
+<style>
+  #tooltip {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+    display: none;
+    max-width: 800px;
+  }
+
+  #tooltip[data-show] {
+    display: block;
+  }
+
+  #arrow,
+  #arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
+  }
+
+  #arrow::before {
+    content: '';
+    transform: rotate(45deg);
+    background: #333;
+  }
+
+  #tooltip[data-popper-placement^='top'] > #arrow {
+    bottom: -4px;
+  }
+
+  #tooltip[data-popper-placement^='bottom'] > #arrow {
+    top: -4px;
+  }
+
+  #tooltip[data-popper-placement^='left'] > #arrow {
+    right: -4px;
+  }
+
+  #tooltip[data-popper-placement^='right'] > #arrow {
+    left: -4px;
+  }
+</style>
+
+<div class="container mt-3">
+    <h1><%= data.title %></h1>
+    <div class="d-flex justify-content-start">
+      <div class="p-2 bd-highlight"><a class="btn btn-primary" href="/book/">Back</a></div>
+      <div class="p-2 bd-highlight"><a class="btn btn-primary" href="/book/review/<%= data.id %>/add">Write Review</a></div>
+    </div>
+    
+    <table class="table">
+        <tbody>
+         <% for(let i = 0 ; i < data.Users.length ; i++) { %>
+        <tr>
+            <td scope="col"><%= data.Users[i].name %></td>
+            <td scope="col">
+              <button id="review" class="btn btn-info">Lihat Review</button>
+              <p style="display: none;" id="isiReview"><%= data.Users[i].UserBook.review %></p>
+              <div id="tooltip" role="tooltip">
+                <p><%= cutReview(data.Users[i].UserBook.review) %></p>
+                <div id="arrow" data-popper-arrow></div>
+              </div>
+            </td>
+        </tr>
+         <% } %>
+        </tbody>
+      </table>
+</div>
+
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+  const review = Array.apply(null, document.querySelectorAll('#review'));
+  const tooltip = Array.apply(null, document.querySelectorAll('#tooltip'));
+  const isiReview = Array.apply(null, document.querySelectorAll('#isiReview'));
+
+  for (let i = 0; i < review.length; i++) {
+    let popperInstance = null;
+  
+    function create() {
+      popperInstance = Popper.createPopper(review[i], tooltip[i]);
+    }
+
+    create();
+  
+    function destroy() {
+      if (popperInstance) {
+        popperInstance.destroy();
+        popperInstance = null;
+      }
+    }
+
+    function showTooltip() {
+      tooltip[i].setAttribute('data-show', '');
+      create();
+    }
+
+    function hideTooltip() {
+      tooltip[i].removeAttribute('data-show');
+      destroy();
+    }
+
+    review[i].addEventListener('mouseenter', showTooltip);
+    review[i].addEventListener('mouseleave', hideTooltip);
+
+    review[i].addEventListener('click', () => {
+      Swal.fire(isiReview[i].textContent);
+    })
+  }
+</script>
+</body>
+<%- include('./partial/footer')%>
