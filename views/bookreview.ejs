@@ -1,6 +1,14 @@
-<%- include('./partial/header')%>
+<%- include('./partial/header', {title: 'Book Review', req})%>
 
 <style>
+  .swal2-title {
+    text-align: justify;
+  }
+
+  .swal2-popup {
+    width: 40em;
+  }
+
   #tooltip {
     background: #333;
     color: white;

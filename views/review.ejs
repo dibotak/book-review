@@ -1,4 +1,4 @@
-<%- include('./partial/header')%>
+<%- include('./partial/header', {title: 'Write Review', req})%>
 
 <div class="container mt-5">
 <form action="/book/review/<%= data.id%>/add" method="POST">

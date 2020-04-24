@@ -6,7 +6,7 @@ class UserController{
     static show(req,res){
         User.All()
         .then((data=>{
-            res.render('usertable',{data})
+            res.render('usertable',{data, req})
         })).catch((err=>{
             res.send(err)
         }))
@@ -20,7 +20,7 @@ class UserController{
             include:[{model:Book}]
         })
         .then(data=>{
-            res.render('reviewtable',{data, cutReview})
+            res.render('reviewtable',{data, cutReview, req})
         }).catch((err=>{
             res.send(err)
         }))

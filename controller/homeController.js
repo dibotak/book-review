@@ -4,12 +4,12 @@ const bcrypt = require('bcryptjs')
 class HomeController{
 
     static home(req,res){
-        res.render('home')
+        res.render('home', {req})
     }
 
     static register(req,res){
         const error=req.query.error
-        res.render('register',{error})
+        res.render('register',{error,req})
     }
     
     static registerPost(req,res){
@@ -33,7 +33,7 @@ class HomeController{
     }
 
     static login(req,res){
-        res.render('login')
+        res.render('login', {req})
     }
 
     static loginPost(req,res){

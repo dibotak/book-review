@@ -1,4 +1,4 @@
-<%- include('./partial/header')%>
+<%- include('./partial/header', {title: 'Edit Data Book', req})%>
 
 <div class="container mt-5">
 <form action="/book/edit/<%= data.id%>" method="POST">

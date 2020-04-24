@@ -8,7 +8,7 @@ class BookController{
         Book.findAll()
         .then((data=>{
             // res.send(data)
-            res.render('booktable',{data})
+            res.render('booktable',{data, req})
         })).catch((err=>{
             res.send(err)
         }))
@@ -16,7 +16,7 @@ class BookController{
 
     static addForm(req,res){
         const error=req.query.error
-        res.render('add',{error})
+        res.render('add',{error, req})
     }
 
     static add(req,res){
@@ -40,7 +40,7 @@ class BookController{
             }
         })
         .then(data=>{
-            res.render('edit',{data})
+            res.render('edit',{data, req})
         }).catch(err=>{
             res.send(err)
         })
@@ -85,7 +85,7 @@ class BookController{
             }
         })
         .then(data=>{
-            res.render('review',{data})
+            res.render('review',{data, req})
         })
         .catch((err=>{
             res.send(err)
@@ -116,7 +116,7 @@ class BookController{
         })
         .then(data => {
             // res.send(data)
-            res.render('bookreview', {data, cutReview})
+            res.render('bookreview', {data, cutReview, req})
         })
         .catch(err => {
             res.send(err)

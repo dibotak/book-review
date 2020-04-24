@@ -1,6 +1,14 @@
-<%- include('./partial/header')%>
+<%- include('./partial/header', {title: 'User Review', req})%>
 
 <style>
+    .swal2-title {
+    text-align: justify;
+  }
+
+  .swal2-popup {
+    width: 40em;
+  }
+
   #tooltip {
     background: #333;
     color: white;
@@ -71,9 +79,11 @@
                 <div id="arrow" data-popper-arrow></div>
               </div>
             </th>
-            <th>
-              <a class="btn btn-primary" href="/user/seereview/<%= data.Books[i].id%>/delete/<%= data.id%>">Delete</a>
-            </th>
+            <% if (data.id == req.session.userId) { %>
+              <th>
+                <a class="btn btn-primary" href="/user/seereview/<%= data.Books[i].id%>/delete/<%= data.id%>">Delete</a>
+              </th>
+            <% } %>
         </tr>
          <% } %>
         </tbody>
