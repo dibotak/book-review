@@ -22,7 +22,7 @@
             <th scope="col"><%= data[i].title%></th>
             <th scope="col"><%= data[i].writer%></th>
             <th scope="col"><%= data[i].publisher%></th>
-            <th scope="col"><%= data[i].price%></th>
+            <th scope="col"><%= toRupiah(data[i].price)%></th>
             <th scope="col"><%= data[i].released_year%></th>
             <th>
               <a class="btn btn-primary" href="/book/edit/<%= data[i].id%>">Edit</a>

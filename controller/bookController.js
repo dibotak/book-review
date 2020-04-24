@@ -1,5 +1,6 @@
 const {User,Book,UserBook}=require('../models')
 const cutReview = require('../helpers/cutReview')
+const toRupiah = require('../helpers/toRupiah')
 
 // const bcrypt = require('bcryptjs')
 
@@ -8,7 +9,7 @@ class BookController{
         Book.findAll()
         .then((data=>{
             // res.send(data)
-            res.render('booktable',{data, req})
+            res.render('booktable',{data, req, toRupiah})
         })).catch((err=>{
             res.send(err)
         }))
